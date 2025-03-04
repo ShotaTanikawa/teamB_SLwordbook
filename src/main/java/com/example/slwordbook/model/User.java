@@ -49,7 +49,7 @@ public class User {
 
     //削除フラグ
     @Column(nullable = false)
-    private boolean is_deleted;
+    private boolean deleted;
 
     //中間テーブル
     @ManyToMany(fetch = FetchType.EAGER)
@@ -74,11 +74,11 @@ public class User {
     }
 
     public User(Long id, String name, String password,
-            boolean is_deleted, Set<Role> roles, List<Word> words, List<Wordbook> wordbooks) {
+            boolean deleted, Set<Role> roles, List<Word> words, List<Wordbook> wordbooks) {
         this.id = id;
         this.name = name;
         this.password = password;
-        this.is_deleted = is_deleted;
+        this.deleted = deleted;
         this.roles = roles;
         this.words = words;
         this.wordbooks = wordbooks;
@@ -108,12 +108,12 @@ public class User {
         this.password = password;
     }
 
-    public boolean isIs_deleted() {
-        return is_deleted;
+    public boolean isDeleted() {
+        return deleted;
     }
 
-    public void setIs_deleted(boolean is_deleted) {
-        this.is_deleted = is_deleted;
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public Set<Role> getRoles() {
