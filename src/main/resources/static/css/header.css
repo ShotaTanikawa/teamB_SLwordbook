@@ -31,6 +31,13 @@
     background-color: #444;
 }
 
+/* ユーザーメニュー */
+.user-menu {
+    position: relative;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
 /* ドロップダウンメニュー */
 .dropdown-menu {
     display: none;
@@ -43,6 +50,11 @@
     border-radius: 8px;
     padding: 10px;
     width: 120px;
+}
+
+/* ユーザー名にホバーした時に表示 */
+.user-menu:hover .dropdown-menu {
+    display: block;
 }
 
 /* ログアウトボタン */
