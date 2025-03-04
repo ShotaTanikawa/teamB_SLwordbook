@@ -1,7 +1,7 @@
 package com.example.slwordbook.model;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 import org.hibernate.annotations.SQLRestriction;
 
@@ -13,8 +13,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -58,15 +58,15 @@ public class Wordbook {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    //中間テーブル
-    @ManyToMany(mappedBy = "wordbooks")
-    private Set<Word> words;
+    // 中間エンティティ
+    @OneToMany(mappedBy = "wordbook")
+    private List<WordbookWord> wordbookWords;
 
     public Wordbook() {
     }
 
-    public Wordbook(Long id, String name, String describe, LocalDateTime createdAt,
-            LocalDateTime updatedAt, boolean is_deleted, User user, Set<Word> words) {
+public Wordbook(Long id, String name, String describe, LocalDateTime createdAt,
+            LocalDateTime updatedAt, boolean is_deleted, User user, List<WordbookWord> wordbookWords) {
         this.id = id;
         this.name = name;
         this.describe = describe;
@@ -74,7 +74,7 @@ public class Wordbook {
         this.updatedAt = updatedAt;
         this.is_deleted = is_deleted;
         this.user = user;
-        this.words = words;
+        this.wordbookWords = wordbookWords;
     }
 
     public Long getId() {
@@ -125,20 +125,20 @@ public class Wordbook {
         this.is_deleted = is_deleted;
     }
 
-    public Set<Word> getWords() {
-        return words;
-    }
-
-    public void setWords(Set<Word> words) {
-        this.words = words;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<WordbookWord> getWordbookWords() {
+        return wordbookWords;
+    }
+
+    public void setWordbookWords(List<WordbookWord> wordbookWords) {
+        this.wordbookWords = wordbookWords;
     }
 
     

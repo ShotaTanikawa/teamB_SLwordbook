@@ -45,6 +45,11 @@
     width: 120px;
 }
 
+/* ユーザー名にホバーした時に表示 */
+.user-menu:hover .dropdown-menu {
+    display: block;
+}
+
 /* ログアウトボタン */
 .logout-btn {
     display: block;
