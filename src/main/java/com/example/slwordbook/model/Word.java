@@ -1,7 +1,7 @@
 package com.example.slwordbook.model;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 import org.hibernate.annotations.SQLRestriction;
 
@@ -9,14 +9,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -74,23 +72,17 @@ public class Word {
     @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
-    //中間テーブル
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-    name = "words_wordbooks",
-    joinColumns = @JoinColumn(name = "word_id"),
-    inverseJoinColumns = @JoinColumn(name = "wordbooks_id")
-    )
-    private Set<Wordbook> wordbooks;
+    //中間エンティティ
+    @OneToMany(mappedBy = "word")
+    private List<WordbookWord> wordbookWords;
+
 
     public Word() {
     }
 
-    
-
     public Word(Long id, String name, String describe, String detail_describe, LocalDateTime createdAt,
             LocalDateTime updatedAt, boolean is_deleted, Category category,
-            User user, Set<Wordbook> wordbooks) {
+            User user, List<WordbookWord> wordbookWords) {
         this.id = id;
         this.name = name;
         this.describe = describe;
@@ -100,9 +92,10 @@ public class Word {
         this.is_deleted = is_deleted;
         this.category = category;
         this.user = user;
-        this.wordbooks = wordbooks;
+        this.wordbookWords = wordbookWords;
     }
 
+    
     public Long getId() {
         return id;
     }
@@ -175,11 +168,12 @@ public class Word {
         this.user = user;
     }
 
-    public Set<Wordbook> getWordbooks() {
-        return wordbooks;
+    public List<WordbookWord> getWordbookWords() {
+        return wordbookWords;
     }
 
-    public void setWordbooks(Set<Wordbook> wordbooks) {
-        this.wordbooks = wordbooks;
+    public void setWordbookWords(List<WordbookWord> wordbookWords) {
+        this.wordbookWords = wordbookWords;
     }
+
 }
