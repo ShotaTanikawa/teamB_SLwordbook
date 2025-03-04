@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- フラグメントの定義 -->
+<html xmlns:th="http://www.thymeleaf.org"
+    th:fragment="layout(title, link, contents)">
+<head>
+<meta charset="UTF-8">
+<title th:replace="${title}">SL単語帳</title>
+<!-- header.css -->//
+<link rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
+<!-- sidebar.css-->
+ <link rel="stylesheet" th:href="@{/css/sidebar.css}" type="text/css">
+</head>
+<body>
+    <div id="pcoded" class="pcoded">
+      <div class="pcoded-container navbar-wrapper">
+        <div th:replace="~{layout/header :: header}"></div>
+        <div class="pcoded-main-container">
+          <div class="pcoded-wrapper">
+            <div th:replace="~{layout/sidebar :: sidebar}"></div>
+            <div th:replace="${contents}"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
