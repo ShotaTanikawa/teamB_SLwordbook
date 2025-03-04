@@ -1,0 +1,60 @@
+/* ヘッダー全体 */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* タイトル */
+.navbar-title a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* ユーザーメニュー */
+.user-menu {
+    position: relative;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+/* ユーザー名 */
+.user-name {
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #444;
+}
+
+/* ドロップダウンメニュー */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: white;
+    color: black;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    width: 120px;
+}
+
+/* ログアウトボタン */
+.logout-btn {
+    display: block;
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
