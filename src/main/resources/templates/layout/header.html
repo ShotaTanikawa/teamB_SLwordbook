@@ -11,17 +11,15 @@
                     <span>SL単語帳</span>
                 </a>
             </div>
-        </div>
-        
-        <div class="user-menu">
-            <span class="user-name" sec:authentication="principal.username">ユーザー名</span>
-            <div class="dropdown-menu">
-                <a href="#" th:href="@{/logout}" class="logout-btn">ログアウト</a>
+            
+            <div class="user-menu">
+                <span class="user-name" sec:authentication="principal.username">ユーザー名</span>
+                <div class="dropdown-menu">
+                    <a href="#" th:href="@{/logout}" class="logout-btn">ログアウト</a>
+                </div>
             </div>
         </div>
     </nav>
     
-    <!-- JavaScript（ドロップダウン表示用） -->
-    <script th:src="@{/js/header.js}"></script>
 </body>
 </html>
