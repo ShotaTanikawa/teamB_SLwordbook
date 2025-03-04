@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.hibernate.annotations.SQLRestriction;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,8 +16,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -57,15 +61,18 @@ public class Word {
     @Column(nullable = false)
     private boolean is_deleted;
 
-    //中間テーブル
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable
-    private Set<Category> categories;
+    //単語が所属するカテゴリー
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    @NotNull(message = "カテゴリーの選択は必須です")
+    private Category category;
 
-    //中間テーブル
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable
-    private Set<User> users;
+    //ユーザーが作成した単語かどうかを識別
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user;
 
     //中間テーブル
     @ManyToMany(fetch = FetchType.EAGER)
@@ -79,9 +86,11 @@ public class Word {
     public Word() {
     }
 
+    
+
     public Word(Long id, String name, String describe, String detail_describe, LocalDateTime createdAt,
-            LocalDateTime updatedAt, boolean is_deleted, Set<Category> categories, Set<User> users,
-            Set<Wordbook> wordbooks) {
+            LocalDateTime updatedAt, boolean is_deleted, Category category,
+            User user, Set<Wordbook> wordbooks) {
         this.id = id;
         this.name = name;
         this.describe = describe;
@@ -89,8 +98,8 @@ public class Word {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.is_deleted = is_deleted;
-        this.categories = categories;
-        this.users = users;
+        this.category = category;
+        this.user = user;
         this.wordbooks = wordbooks;
     }
 
@@ -150,20 +159,20 @@ public class Word {
         this.is_deleted = is_deleted;
     }
 
-    public Set<Category> getCategories() {
-        return categories;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<Wordbook> getWordbooks() {
@@ -173,7 +182,4 @@ public class Word {
     public void setWordbooks(Set<Wordbook> wordbooks) {
         this.wordbooks = wordbooks;
     }
-
-    
-
 }

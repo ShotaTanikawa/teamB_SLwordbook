@@ -1,16 +1,19 @@
 package com.example.slwordbook.model;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 import org.hibernate.annotations.SQLRestriction;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -52,19 +55,16 @@ public class Category {
     @Column(nullable = false)
     private boolean is_deleted;
 
-    //中間テーブル
-    @ManyToMany(mappedBy = "categories")
-    private Set<Word> words;
-
-    //中間テーブル
-    @ManyToMany(mappedBy = "categories")
-    private Set<Wordbook> wordbooks;
+    //カテゴリーに関する単語のリスト
+    @JsonManagedReference
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Word> words;
 
     public Category() {
     }
 
     public Category(Long id, String name, String describe, LocalDateTime createdAt,
-            LocalDateTime updatedAt, boolean opened, boolean is_deleted, Set<Word> words, Set<Wordbook> wordbooks) {
+            LocalDateTime updatedAt, boolean opened, boolean is_deleted, List<Word> words) {
         this.id = id;
         this.name = name;
         this.describe = describe;
@@ -73,7 +73,6 @@ public class Category {
         this.opened = opened;
         this.is_deleted = is_deleted;
         this.words = words;
-        this.wordbooks = wordbooks;
     }
 
     public Long getId() {
@@ -132,22 +131,12 @@ public class Category {
         this.is_deleted = is_deleted;
     }
 
-    public Set<Word> getWords() {
+    public List<Word> getWords() {
         return words;
     }
 
-    public void setWords(Set<Word> words) {
+    public void setWords(List<Word> words) {
         this.words = words;
     }
-
-    public Set<Wordbook> getWordbooks() {
-        return wordbooks;
-    }
-
-    public void setWordbooks(Set<Wordbook> wordbooks) {
-        this.wordbooks = wordbooks;
-    }
-
-    
 
 }

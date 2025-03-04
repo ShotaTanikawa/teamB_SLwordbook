@@ -1,9 +1,13 @@
 package com.example.slwordbook.model;
 
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.annotations.SQLRestriction;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -55,15 +60,28 @@ public class User {
     )
     private Set<Role> roles;
 
+    //ユーザーが作成した単語
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Word> words;
+
+    //ユーザーが作成した単語帳
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Wordbook> wordbooks;
+
     public User() {
     }
 
-    public User(Long id, String name, String password, boolean is_deleted, Set<Role> roles) {
+    public User(Long id, String name, String password,
+            boolean is_deleted, Set<Role> roles, List<Word> words, List<Wordbook> wordbooks) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.is_deleted = is_deleted;
         this.roles = roles;
+        this.words = words;
+        this.wordbooks = wordbooks;
     }
 
     public Long getId() {
@@ -104,6 +122,22 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Word> getWords() {
+        return words;
+    }
+
+    public void setWords(List<Word> words) {
+        this.words = words;
+    }
+
+    public List<Wordbook> getWordbooks() {
+        return wordbooks;
+    }
+
+    public void setWordbooks(List<Wordbook> wordbooks) {
+        this.wordbooks = wordbooks;
     }
 
     

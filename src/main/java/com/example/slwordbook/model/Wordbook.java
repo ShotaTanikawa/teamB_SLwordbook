@@ -5,14 +5,16 @@ import java.util.Set;
 
 import org.hibernate.annotations.SQLRestriction;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -50,15 +52,11 @@ public class Wordbook {
     @Column(nullable = false)
     private boolean is_deleted;
 
-    //中間テーブル
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable
-    private Set<Category> categories;
-
-    //中間テーブル
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable
-    private Set<User> users;
+    //ユーザーが作成した単語帳
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     //中間テーブル
     @ManyToMany(mappedBy = "wordbooks")
@@ -68,15 +66,14 @@ public class Wordbook {
     }
 
     public Wordbook(Long id, String name, String describe, LocalDateTime createdAt,
-            LocalDateTime updatedAt, boolean is_deleted, Set<Category> categories, Set<User> users, Set<Word> words) {
+            LocalDateTime updatedAt, boolean is_deleted, User user, Set<Word> words) {
         this.id = id;
         this.name = name;
         this.describe = describe;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.is_deleted = is_deleted;
-        this.categories = categories;
-        this.users = users;
+        this.user = user;
         this.words = words;
     }
 
@@ -128,28 +125,20 @@ public class Wordbook {
         this.is_deleted = is_deleted;
     }
 
-    public Set<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
     public Set<Word> getWords() {
         return words;
     }
 
     public void setWords(Set<Word> words) {
         this.words = words;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     
