@@ -18,9 +18,10 @@
 
 /* ユーザーメニュー */
 .user-menu {
-    position: relative;
-    cursor: pointer;
-    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 20px;
 }
 
 /* ユーザー名 */
@@ -29,6 +30,8 @@
     padding: 10px;
     border-radius: 5px;
     background-color: #444;
+    color: white;
+    cursor: pointer;
 }
 
 /* ドロップダウンメニュー */
@@ -53,7 +56,7 @@
 /* ログアウトボタン */
 .logout-btn {
     display: block;
-    color: black;
+    color: red;
     padding: 10px;
     text-decoration: none;
     font-weight: bold;
