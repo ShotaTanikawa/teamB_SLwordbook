@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://thymeleaf.org"
+    xmlns:th="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+    th:replace="~{layout/base :: layout(~{::title}, ~)}"
+>
+<head>
+    <title>単語帳一覧</title>
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+</head>
+<body>
+    <main class="content">
+        <h1>MY単語帳</h1>
+        <p>自分だけの単語帳を作成し、管理できます。</p>
+
+        <!--単語帳一覧-->
+        <table class="wordbooks-table">
+            <tr>
+                <th>名前</th>
+                <th>説明</th>
+                <th>カテゴリー</th>
+                <th>作成日</th>
+                <th>アクション</th>
+            </tr>
+            <tr th:each="wordbook : ${listWordbooks}">
+                <td th:text="${wordbook.name}"></td>
+                <td th:text="${wordbook.describe}"></td>
+                <td th:text="${wordbook.category}"></td>
+                <td th:text="${#temporals.format(wordbook.createdAt, 'yyyy-MM-dd')}"></td>
+                <td>
+                    <a th:href="@{/user/wordbooks/edit/{id}(id=${wordbook.id})}" class="edit-btn">編集</a>
+                    <a th:href="@{/user/wordbook/delete/{id}(id=${wordbook.id})}" class="delete-btn">削除</a>
+                    <a th:href="@{/user/wordbooks/{id}/words(id=${wordbook.id})}" class="words-btn">単語一覧</a>
+                </td>
+            </tr>
+        </table>
+
+        <!-- 単語帳新規登録ボタン -->
+        <div class="button-container">
+            <a th:href="@{/user/wordbooks/new}" class="add-btn">単語帳を新規登録する</a>
+        </div>
+    </main>
+</body>
+</html>
