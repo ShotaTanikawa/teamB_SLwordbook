@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{layout/base :: layout(~{::title},~{::body/content()})}">
+<head>
+    <meta charset="UTF-8">
+    <title>SL単語帳 管理画面</title>
+</head>
+<body>
+    <main class="content">
+        <h1>単語編集</h1>
+        <form th:action="@{/admin/categories/{categoryId}/edit(categoryId=${category.id})}" th:method="post" th:object="${word}" class="form-container">
+            <input type="hidden" th:field="*{id}">
+
+            <label for="word">単語名</label>
+            <input type="text" th:field="*{name}" required>
+
+            <label for="describe">意味</label>
+            <textarea th:field="*{describe}" rows="3" required>意味</textarea>
+
+            <label for="detail_describe">説明</label>
+            <textarea th:field="*{detail_describe}" rows="3"></textarea>
+
+            <div class="button-group">
+                <button type="submit" class="save-btn">更新</button>
+                <a href="@{/admin/categories/{categoryId}(categoryId=${category.id})}" class="cancel-btn">一覧画面に戻る</a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
