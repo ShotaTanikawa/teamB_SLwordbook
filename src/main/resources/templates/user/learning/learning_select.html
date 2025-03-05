@@ -1,0 +1,49 @@
+<!-- 単語帳名					
+カテゴリー名					
+単語帳の説明					
+問題数の設定					
+スタート					 -->
+
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+    th:replace="~{layout/base :: layout(~{::title}, ~{::link}, ~{::body/content()})}"
+>
+<head>
+  <title>学習機能</title>
+  <link />
+</head>
+<body>
+  <div class="pcoded-content">
+    <div class="page-header">
+              <h2>学習機能</h2>
+    </div>
+    <div class="pcoded-inner-content">
+      <table class="table table-hover table-sm">
+        <thead>
+          <tr>
+            <th scope="col">MY単語帳</th>
+            <th scope="col">説明</th>
+            <th scope="col">カテゴリー</th>
+            <th scope="col">問題数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="wordbook : ${wordbooks}">
+            <th scope="row" th:text="${wordbook.name}"></th>
+            <td th:text="${wordbook.describe}"></td>
+            <td th:text="${wordbook.category.name}"></td>
+            <td>
+              <!--後で直す-->
+              <form action="#" th:action="@{/user/learning/wordbooks/{id}(id=${wordbook.id})}" method="GET">
+                <input type="number" name="nums" id="nums" value="" min="1" max="" required>
+                <button type="submit" class="btn btn-danger btn-sm m-1">学習開始</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
