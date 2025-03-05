@@ -34,7 +34,7 @@ public class DevAuthenticationFilter extends GenericFilterBean {
         // ダミーのユーザーを生成
         User dummyUser = new User();
         dummyUser.setId(1L); // 仮のID
-        dummyUser.setName("dummyTeacher"); // 仮のusername
+        dummyUser.setUsername("dummyTeacher"); // 仮のusername
         dummyUser.setPassword("dummyPassword");
         dummyUser.setDeleted(false);
         dummyUser.setRoles(

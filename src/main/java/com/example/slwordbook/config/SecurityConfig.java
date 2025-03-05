@@ -25,7 +25,7 @@ public class SecurityConfig {
                 // ログイン処理を行うURL(POST)
                 // .loginProcessingUrl("/login")
                 // ログインページを表示するURL(GET)
-                // .loginPage("/login")
+                // .loginPage("/home/login")
                 // ログインできなかった時のURL
                 // .failureUrl("/login?error")
                 // これを付けたページはログイン無しでもアクセス出来る

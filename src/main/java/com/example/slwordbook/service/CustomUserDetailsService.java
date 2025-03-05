@@ -37,9 +37,9 @@ public class CustomUserDetailsService implements UserDetailsService {
             .collect(Collectors.toSet());
 
         return new org.springframework.security.core.userdetails.User(
-            user.getName(),
+            user.getUsername(),
             user.getPassword(),
-            user.isDeleted(),
+            !user.isDeleted(),
             true, true, true, // accountNonExpired, credentialsNonExpired, accountNonLocked
             grantedRoles
         );
