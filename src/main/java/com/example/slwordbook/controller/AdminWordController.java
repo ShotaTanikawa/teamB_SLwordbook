@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.slwordbook.model.Category;
 import com.example.slwordbook.model.Word;
@@ -28,28 +29,37 @@ public class AdminWordController {
     @Autowired
     private WordService wordService;
 
-    //カテゴリー内の単語一覧機能
-    @GetMapping("/{categoryId}")
-    public String wordIndex(@PathVariable("categoryId") Long categoryId, Model model) {
-        Category category = categoryService.findCategoryById(categoryId);
-        List<Word> words = wordService.findAllWords();
-        model.addAttribute("category", category);
-        model.addAttribute("words", words);
-        return "admin/categories/admin_wordslist.html";
-    }
-
-    // //カテゴリー内の単語一覧機能・検索機能
-    // @GetMapping
-    // public String wordIndex(@PathVariable("categoryId") Long categoryId,
-    //                         @RequestParam(name = "name", required = false) String name, Model model) {
+    // //カテゴリー内の単語一覧機能
+    // @GetMapping("/{categoryId}")
+    // public String wordIndex(@PathVariable("categoryId") Long categoryId, Model model) {
     //     Category category = categoryService.findCategoryById(categoryId);
     //     List<Word> words = wordService.findAllWords();
-    //     List<Word> searchWord = wordService.findByWord(name);
     //     model.addAttribute("category", category);
     //     model.addAttribute("words", words);
-    //     model.addAttribute("searchWord", searchWord);
     //     return "admin/categories/admin_wordslist.html";
     // }
+
+    //カテゴリー内の単語一覧機能・検索機能
+    @GetMapping("/{categoryId}")
+    public String wordIndex(@PathVariable("categoryId") Long categoryId,
+                            @RequestParam(name = "keyword", required = false) String keyword, Model model) {
+        Category category = categoryService.findCategoryById(categoryId);
+        List<Word> words;
+
+        // 検索条件があれば絞り込む
+        if (keyword != null && !keyword.isEmpty()) {
+            // 名前で検索
+            words = wordService.search(keyword, categoryId);
+        } else {
+            // 検索条件がなければ全ての単語を取得
+            words = wordService.findAllWordsByCategory(categoryId);
+        }
+
+        model.addAttribute("category", category);
+        model.addAttribute("words", words);
+        model.addAttribute("keyword", keyword);
+        return "admin/categories/admin_wordslist.html";
+    }
 
     //単語新規登録(入力)
     @GetMapping("/{categoryId}/new")
@@ -58,17 +68,18 @@ public class AdminWordController {
         model.addAttribute("word", new Word());
         model.addAttribute("category", category);
         return "admin/categories/word_new.html";
-
     }
 
     //単語新規登録(出力)
     @PostMapping("/{categoryId}/save")
-    public String wordAdd(@PathVariable("categoryId") Long id, @Valid Word word, BindingResult result, Model model) {
+    public String wordAdd(@PathVariable("categoryId") Long categoryId, @Valid Word word, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("errors", result.getAllErrors());
             model.addAttribute("word", word);
             return "admin/categories/word_new.html";
         }
+        Category category = categoryService.findCategoryById(categoryId);
+        word.setCategory(category);
         wordService.save(word);
         return "redirect:/admin/categories/{categoryId}";
     }
@@ -84,7 +95,7 @@ public class AdminWordController {
     }
 
     //単語編集(出力)
-    @PostMapping("/{categoryId}/edit")
+    @PostMapping("/{categoryId}/edit/{wordId}")
     public String wordEdit(@PathVariable("categoryId") Long categoryId, @PathVariable("wordId") Long wordId, Word word) {
         wordService.update(word);
         return "redirect:/admin/categories/{categoryId}";

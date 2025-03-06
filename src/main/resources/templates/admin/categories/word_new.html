@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+        th:replace="~{layout/base_admin :: layout(~{::title}, ~{::link}, ~{::main})}"
         >
 <head>
     <meta charset="UTF-8">
@@ -9,6 +11,7 @@
     <main class="content">
         <h1>新規単語登録</h1>
         <form th:action="@{/admin/categories/{categoryId}/save(categoryId=${category.id})}" th:method="post" th:object="${word}" class="form-container">
+            <input type="hidden" th:field="*{category.id}" th:value="${category.id}">
             <label for="name">単語名</label>
             <input type="text" th:field="*{name}" required>
 
