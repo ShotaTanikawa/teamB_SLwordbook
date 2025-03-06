@@ -1,118 +1,62 @@
-<!-- 問題数					
-単語名					
-単語の意味					
-単語の説明					
-次へ					
-終了					 -->
-
-
 <!DOCTYPE html>
 <html
     xmlns:th="http://www.thymeleaf.org"
     xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-  th:replace="~{layout/base :: layout(~{::title}, ~{::link}, ~{::body/content()})}"
+    th:replace="~{layout/base :: layout(~{::title}, ~{::link}, ~{::body/content()})}"
 >
 <head>
-  <!--表面と裏面用意してjsで操作、みたいな?-->
-  <title>学習開始</title>
-  <link />
+  <title>学習機能</title>
+  <link rel="stylesheet" href="user_learning.css">
 </head>
 <body>
   <div class="pcoded-content">
-    <!-- Page-header start -->
     <div class="page-header">
-      <div class="page-block">
-        <div class="row align-items-center">
-          <div class="col-md-12">
-            <div class="page-header-title">
-              <h2 class="mt-2">ブランド一覧</h2>
-            </div>
-          </div>
-        </div>
-      </div>
+              <h2>学習機能</h2>
     </div>
-    <!-- Page-header end -->
     <div class="pcoded-inner-content">
-      <!-- Main-body start -->
-      <div class="main-body">
-        <div class="page-wrapper">
-          <!-- Page-body start -->
-          <div class="page-body">
-            <!-- message -->
-            <div th:replace="~{fragments :: message}"></div>
+      <div>
+        <h4>問題数</h4>
+        <div id="question-number"></div>
+      </div>
 
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>検索条件</h4>
-                  </div>
-                  <div class="card-block">
-                    <form th:action="@{/brands}" method="get">
-                      <div class="form-group row">
-                        <div class="col-sm-12">
-                          <div class="">
-                            <input class="form-control" type="search" name="keyword" th:value="${keyword}" required>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="m-2">
-                          <button class="btn btn-primary waves-effect waves-light">検索</button>
-                        </div>
-                        <div class="m-2">
-                          <a class="btn btn-secondary waves-effect waves-light" th:href="@{/brands}">リセット</a>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                <!-- Hover table card start -->
-                <div class="card">
-                  <div class="card-header">
-                      <h5>検索結果一覧</h5>
-                  </div>
-                  <div class="card-block table-border-style">
-                    <div class="table-responsive">
-                      <table class="table table-hover table-sm">
-                        <thead>
-                          <tr>
-                            <th scope="col" style="width: 5%">ID</th>
-                            <th scope="col">名前</th>
-                            <th scope="col" style="width: 5%"></th>
-                            <th scope="col" style="width: 5%"></th>
-                            <th scope="col" style="width: 5%"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr th:each="brand : ${listBrands}">
-                            <th scope="row" th:text="${brand.id}"></th>
-                            <td th:text="${brand.name}"></td>
-                            <td>
-                              <a class="btn btn-primary btn-sm m-1" th:href="@{/brands/detail/{id}(id=${brand.id})}">詳細</a>
-                            </td>
-                            <td>
-                              <a class="btn btn-success btn-sm m-1" th:href="@{/brands/edit/{id}(id=${brand.id})}">編集</a>
-                            </td>
-                            <td>
-                              <a class="btn btn-danger btn-sm m-1 link-delete" th:href="@{/brands/delete/{id}(id=${brand.id})}">削除</a>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-                <!-- Hover table card end -->
-              </div>
-            </div>
+      <div class="flashcard-container">
+        <!-- フラッシュカード -->
+        <div class="card">
+          <!-- 表面 -->
+          <div class="front">
+            <!--単語名-->
+              <div id="word-name" class="word-name-container"></div>
           </div>
-          <!-- Page-body end -->
-          <div th:replace="~{fragments :: confirm_modal}"></div>
+          <!-- 裏面 -->
+          <div class="back">
+            <table>
+              <tr><!--単語の名前-->
+                <th>名前</th>
+                <td class="word-name-container"></td>
+              </tr>
+              <tr><!--単語の意味-->
+                <th>意味</th>
+                <td id="word-describe" class="word-describe-container"></td>
+              </tr>
+              <tr><!--単語の説明-->
+                <th>説明</th>
+                <td id="word-detail_describe" class="word-detail_describe-container"></td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
-      <!-- Main-body end -->
+      <div class="button-container">
+        <button id="next-btn" class="next-btn">次へ</button>
+        <a th:href="user/learning/user_learning.html" class="cancel-btn">終了</a>
+      </div>
     </div>
   </div>
+  <script>
+    let wordList = /*[[${wordList}]]*/ [];
+  </script>
+  <script src="user_learning_wordbooks.js"></script>
 </body>
 </html>
+
+

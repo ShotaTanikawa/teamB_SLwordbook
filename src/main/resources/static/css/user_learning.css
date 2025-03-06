@@ -1,0 +1,74 @@
+/* フラッシュカード */
+.flashcard-container {
+    width: 300px;
+    height: 200px;
+    perspective: 1000px; /* 3D効果を有効にする */
+    position: absolute; /* 絶対位置で配置 */
+    top: 50%; /* 画面の中央 */
+    left: 50%; /* 画面の中央 */
+    transform: translate(-50%, -50%); /* 完全に中央に配置 */
+}
+
+/* カード */
+.flashcard-container .card {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d; /* 3D空間で変形を保存 */
+    transform-origin: center; /* 中心を基準に回転 */
+    transition: transform 0.6s; /* 裏面に回転するアニメーション */
+    position: relative;
+    border-radius: 8px; /* 角を丸く */
+    background-color: #fff; /* カードの背景色 */
+}
+
+/* クリック時にカードを180度裏返す */
+.flashcard-container .card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+
+/* カード共通部 */
+.flashcard-container .front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* 裏面を隠す */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #81d4fa;
+    color: #333;
+    border-radius: 8px;
+}
+
+/* 表面 */
+.flashcard-container .front {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* 裏面 */
+.flashcard-container .back {
+    padding: 20px;
+    text-align: left;
+    transform: rotateY(180deg);
+}
+
+/* テーブルスタイル */
+.flashcard-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.flashcard-container td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.flashcard-container th {
+    text-align: left;
+    padding: 8px;
+    background-color: #f1f1f1;
+    font-weight: bold;
+}

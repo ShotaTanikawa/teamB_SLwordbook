@@ -31,8 +31,6 @@ import jakarta.validation.Valid;
 @RequestMapping("/user/learning/wordbooks")
 public class UserLearningController {
 
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private WordbookService wordbookService;
@@ -52,15 +50,13 @@ public class UserLearningController {
     @GetMapping("/{id}")
     public String learningStart(@PathVariable("id") Long id, Model model,
             @RequestParam(name = "nums") int nums) {
-        List <WordbookWord> wordbookWords = wordbookWordService.findByWordbookId(id);
+        List <WordbookWord> wordbookWords = wordbookWordService.findByWordbookId(id); //?
         Collections.shuffle(wordbookWords);
-        List<WordbookWord> selectedWords = wordbookWords.stream()
+        List<WordbookWord> wordList = wordbookWords.stream()
             .limit(nums)
             .collect(Collectors.toList());
             
-        model.addAttribute("selectedWords", selectedWords);
+        model.addAttribute("wordList", wordList);
         return "user/learning/user_learning";
     }
-
-    // バリデーションは設定しないで、htmlで最大数までしか選べないように。
 }
