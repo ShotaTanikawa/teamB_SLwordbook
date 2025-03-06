@@ -10,4 +10,6 @@ import com.example.slwordbook.model.Role;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
     Optional<Role> findByUserId(Long id);
+
+    Optional<Role> findByname(String name);
 }

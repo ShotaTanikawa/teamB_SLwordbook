@@ -9,8 +9,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LoginController {
     
+    //localhost:8080/の遷移先を決めるコントローラー
     @GetMapping()
-    public String showTestPage(@AuthenticationPrincipal UserDetails currentUser, Model model) {
+    public String indexPage() {
+        return "index";
+    }
+
+    //ログイン画面に遷移するコントローラー
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
+
+    //ログイン成功時の遷移先を決めるコントローラー
+    @GetMapping("/home")
+    public String homePage(@AuthenticationPrincipal UserDetails currentUser, Model model) {
         model.addAttribute("username", currentUser.getUsername());
         return "home";
     }

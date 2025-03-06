@@ -21,11 +21,11 @@ public class SecurityConfig {
         http
             .formLogin(login -> login
                 // ログイン成功時に遷移するURL
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/home")
                 // ログイン処理を行うURL(POST)
                 // .loginProcessingUrl("/login")
                 // ログインページを表示するURL(GET)
-                // .loginPage("/home/login")
+                .loginPage("/login")
                 // ログインできなかった時のURL
                 // .failureUrl("/login?error")
                 // これを付けたページはログイン無しでもアクセス出来る
@@ -38,6 +38,8 @@ public class SecurityConfig {
                     .atCommonLocations()).permitAll()
                 // URL「/」にはログイン無しでもアクセスできる
                 // .requestMatchers("/").permitAll()
+                .requestMatchers("/").permitAll()
+                .requestMatchers("/login").permitAll()
                 .requestMatchers("/api/**").permitAll()
                 // /user 以降のURLにはロールが「USER」のみアクセス出来る
                 .requestMatchers("/user/**").hasRole("USER")
