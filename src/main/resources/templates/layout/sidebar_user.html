@@ -4,34 +4,14 @@
 <head>
 </head>
 <body>
-  <nav th:fragment="sidebar" class="pcoded-navbar">
+  <aside th:fragment="sidebar_user" class="sidebar">
     <ul>
-      <li>
-        <a th:href="@{/user}">
-          <span>HOME</span>
-        </a>
-      </li>
-      <li>
-        <a th:href="@{/user/categories}">
-          <span>辞書</span>
-        </a>
-      </li>
-      <li>
-        <a th:href="@{/user/workbooks}">
-          <span>MY単語帳</span>
-        </a>
-      </li>
-      <li>
-        <a th:href="@{/user/learning/wordbooks}">
-          <span>学習機能</span>
-        </a>
-      </li>
-      <li>
-        <a th:href="@{/user/mypage/edit}">
-          <span>マイページ</span>
-        </a>
-      </li>
+      <li><a th:href="@{/user}">HOME</a></li>
+      <li><a th:href="@{/user/categories}">辞書</a></li>
+      <li><a th:href="@{/user/workbooks}">MY単語帳</a></li>
+      <li><a th:href="@{/user/learning/wordbooks}">学習機能</a></li>
+      <li><a th:href="@{/user/mypage/edit}">マイページ</a></li>
     </ul>
-  </nav>
+  </aside>
 </body>
 </html>
