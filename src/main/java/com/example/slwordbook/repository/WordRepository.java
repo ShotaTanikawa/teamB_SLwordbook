@@ -10,5 +10,5 @@ import com.example.slwordbook.model.Word;
 @Repository
 public interface WordRepository extends JpaRepository<Word, Long> {
     
-    List<Word> findByWord(String name);
+    List<Word> findByName(String name);
 }

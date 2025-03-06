@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org"
-        th:replace="~{layout/base :: layout(~{::title},~{::body/content()})}">
+        >
 <head>
     <meta charset="UTF-8">
     <title>SL単語帳 管理画面</title>
@@ -20,7 +20,7 @@
             
             <div class="button-group">
                 <button type="submit" class="save-btn">登録</button>
-                <a href="@{/admin/categories/{categoryId}(categoryId=${category.id})}" class="cancel-btn">一覧画面に戻る</a>
+                <a th:href="@{/admin/categories/{categoryId}(categoryId=${category.id})}" class="cancel-btn">一覧画面に戻る</a>
             </div>
         </form>
     </main>

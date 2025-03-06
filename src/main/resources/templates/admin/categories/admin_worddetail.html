@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org"
-        th:replace="~{layout/base :: layout(~{::title},~{::body/content()})}">
+        >
 <head>
     <meta charset="UTF-8">
     <title>SL単語帳 管理画面</title>
 </head>
 <body>
     <main class="content">
-        <div class="word-detail-container" th:each="word : ${words}">
+        <div class="word-detail-container">
             <h1 th:text="${word.name}">名前</h1>
             <p th:text="${word.describe}">意味</p>
 
@@ -33,7 +33,7 @@ public class Car {
             <p th:text="${word.updatedAt}">更新日時</p>
 
             <div class="button-container">
-                <a href="@{/admin/categories/{categoryId}(categoryId=${category.id})}" class="back-btn">一覧画面に戻る</a>
+                <a th:href="@{/admin/categories/{categoryId}(categoryId=${category.id})}" class="back-btn">一覧画面に戻る</a>
             </div>
     </main>
 </body>

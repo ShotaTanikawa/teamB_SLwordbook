@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.slwordbook.model.Category;
 import com.example.slwordbook.model.Word;
 import com.example.slwordbook.repository.WordRepository;
 
@@ -18,6 +19,8 @@ public class WordService {
 
     @Autowired
     private WordRepository wordRepository;
+    @Autowired
+    private CategoryService categoryService;
     
     //単語全取得メソッド
     public List<Word> findAllWords() {
@@ -32,13 +35,15 @@ public class WordService {
 
     //検索（単語名）メソッド
     public List<Word> findByWord(String name) {
-        return wordRepository.findByWord(name);
+        return wordRepository.findByName(name);
     }
 
     //保存メソッド
     @Transactional
     public Word save(Word word) {
         word.setCreatedAt(LocalDateTime.now());
+        Category category = categoryService.findCategoryById(word.getCategory().getId());
+        word.setCategory(category);
         return wordRepository.save(word);
     }
 
