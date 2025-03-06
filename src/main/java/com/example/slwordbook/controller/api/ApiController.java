@@ -19,11 +19,6 @@ public class ApiController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public String home() {
-        return "index";
-    }
-
     @GetMapping("/signup")
     public String addUserForm(Model model) {
         model.addAttribute("user", new User());

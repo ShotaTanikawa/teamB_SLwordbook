@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LoginController {
     
-    //localhost:8080/の遷移先を決めるコントローラー
-    @GetMapping()
-    public String indexPage() {
-        return "index";
-    }
-
     //ログイン画面に遷移するコントローラー
     @GetMapping("/login")
     public String loginPage() {
