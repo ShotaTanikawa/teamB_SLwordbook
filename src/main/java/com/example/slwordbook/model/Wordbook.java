@@ -20,7 +20,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@SQLRestriction("updatedAt IS NULL AND is_deleted IS false")
+@SQLRestriction("updated_at IS NULL AND is_deleted IS false")
 @Table(name = "wordbooks")
 public class Wordbook {
     
@@ -42,11 +42,11 @@ public class Wordbook {
 
     //登録日時
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime created_at;
 
     //更新日時
     @Column
-    private LocalDateTime updatedAt;
+    private LocalDateTime updated_at;
 
     //削除フラグ
     @Column(nullable = false)
@@ -65,13 +65,13 @@ public class Wordbook {
     public Wordbook() {
     }
 
-public Wordbook(Long id, String name, String describe, LocalDateTime createdAt,
+public Wordbook(Long id, String name, String describe, LocalDateTime created_at,
             LocalDateTime updatedAt, boolean is_deleted, User user, List<WordbookWord> wordbookWords) {
         this.id = id;
         this.name = name;
         this.describe = describe;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.created_at = created_at;
+        this.updated_at = updatedAt;
         this.is_deleted = is_deleted;
         this.user = user;
         this.wordbookWords = wordbookWords;
@@ -102,19 +102,19 @@ public Wordbook(Long id, String name, String describe, LocalDateTime createdAt,
     }
 
     public LocalDateTime getCreatedAt() {
-        return createdAt;
+        return created_at;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(LocalDateTime created_at) {
+        this.created_at = created_at;
     }
 
     public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+        return updated_at;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAt(LocalDateTime updated_at) {
+        this.updated_at = updated_at;
     }
 
     public boolean isIs_deleted() {

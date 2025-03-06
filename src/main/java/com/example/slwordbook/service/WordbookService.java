@@ -15,7 +15,7 @@ public class WordbookService {
     private WordbookRepository wordbookRepository;
     
     //Get all Mywordbooks
-    public List<Wordbook> listAll() {
-        return wordbookRepository.findAll();
+    public List<Wordbook> listAll(Long id) {
+        return wordbookRepository.findByUserId(id);
     }
 }
