@@ -37,8 +37,8 @@ public class User {
     //ユーザー名
     @NotBlank(message = "ユーザー名は必須です")
     @Size(min = 4, max = 30, message="ユーザー名は4から30文字までにして下さい")
-    @Column(nullable = false, unique = true)
-    private String name;
+    @Column(name = "name", nullable = false, unique = true)
+    private String username;
 
     // パスワード
     @NotBlank(message = "パスワードは必須です")
@@ -48,7 +48,7 @@ public class User {
     private String password;
 
     //削除フラグ
-    @Column(nullable = false)
+    @Column(name = "is_deleted", nullable = false)
     private boolean deleted;
 
     //中間テーブル
@@ -73,10 +73,10 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String password,
+    public User(Long id, String username, String password,
             boolean deleted, Set<Role> roles, List<Word> words, List<Wordbook> wordbooks) {
         this.id = id;
-        this.name = name;
+        this.username = username;
         this.password = password;
         this.deleted = deleted;
         this.roles = roles;
@@ -92,12 +92,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
