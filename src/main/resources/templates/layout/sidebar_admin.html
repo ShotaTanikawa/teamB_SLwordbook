@@ -4,29 +4,13 @@
 <head>
 </head>
 <body>
-  <nav th:fragment="sidebar" class="pcoded-navbar">
+  <aside th:fragment="sidebar_admin" class="sidebar">
     <ul>
-      <li>
-        <a th:href="@{/admin}">
-          <span>HOME</span>
-        </a>
-      </li>
-      <li>
-        <a th:href="@{/admin/userlist}">
-          <span>ユーザー管理</span>
-        </a>
-      </li>
-      <li>
-        <a th:href="@{/admin/categories}">
-          <span>辞書管理</span>
-        </a>
-      </li>
-      <li>
-        <a th:href="@{/admin/mypage/edit}">
-          <span>マイページ</span>
-        </a>
-      </li>
+      <li><a th:href="@{/admin}">HOME</a></li>
+      <li><a th:href="@{/admin/userlist}">ユーザー管理</a></li>
+      <li><a th:href="@{/admin/categories}">辞書管理</a></li>
+      <li><a th:href="@{/admin/mypage/edit}">マイページ</a></li>
     </ul>
-  </nav>
+  </aside>
 </body>
 </html>

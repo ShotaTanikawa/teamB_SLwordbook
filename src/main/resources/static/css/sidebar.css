@@ -1,18 +1,27 @@
 /* サイドバーの背景色を統一 */
-.pcoded-navbar {
+.sidebar {
     background-color: #222;
     color: white;
     width: 300px;
     position: fixed;
-    top: 60px;
+    top: 90px;
     bottom: 0;
     left: 0;
     padding-top: 20px;
     padding-left: 10px;
+    height: calc(100vh - 90px);
+    z-index: 1000;
+}
+
+/* リストの点を消す */
+.sidebar ul {
+    list-style-type: none; /* リストマーカーを消す */
+    padding: 0;
+    margin: 0;
 }
 
 /* サイドバーの各メニュー */
-.pcoded-navbar a {
+.sidebar a {
     display: block;
     color: white;
     padding: 15px 20px;
@@ -22,13 +31,23 @@
     font-weight: bold;
     border-radius: 5px;
     margin: 10px 10px;
-    list-style-type: none;
 }
-.pcoded-navbar ul {
-    list-style-type: none; /* リストスタイルを消去 */
-    padding: 0; /* 余分なパディングを消去 */
-    margin: 0; /* 余分なマージンを消去 */
+
+/* ホバー時のデザイン */
+.sidebar a:hover {
+    background-color: #555;
 }
-.pcoded-navbar a:hover {
-    background-color: #555; /* ホバー時の色変更 */
+
+/* メインコンテンツの配置調整 */
+.main-container {
+    display: flex;
+    margin-top: 60px;
+}
+
+/* サイドバーのスペースを確保 */
+.content {
+    padding: 20px;
+    margin-left: 310px;
+    flex-grow: 1;
+    background-color: #f9f9f9;
 }
