@@ -43,19 +43,19 @@ public class UserLearningController {
 
     @GetMapping
     public String learningForm(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-        List<WordbookWord> wordbookWords = wordbookWordService.findByUserId(currentUser.getUsername());//?
-        model.addAttribute("wordbookWords", wordbookWords);
+        List<Wordbook> wordbooks = wordbookService.findByUserId(currentUser.getUsername());//?
+
+        model.addAttribute("wordbooks", wordbooks);
         return "user/learning/learning_select";
     }
 
     @GetMapping("/{id}")
     public String learningStart(@PathVariable("id") Long id, Model model,
-            @RequestParam(name = "num") int num) {
+            @RequestParam(name = "nums") int nums) {
         List <WordbookWord> wordbookWords = wordbookWordService.findByWordbookId(id);
         Collections.shuffle(wordbookWords);
-
         List<WordbookWord> selectedWords = wordbookWords.stream()
-            .limit(num)
+            .limit(nums)
             .collect(Collectors.toList());
             
         model.addAttribute("selectedWords", selectedWords);

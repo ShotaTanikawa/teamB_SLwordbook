@@ -33,11 +33,15 @@
           <tr th:each="wordbook : ${wordbooks}">
             <th scope="row" th:text="${wordbook.name}"></th>
             <td th:text="${wordbook.describe}"></td>
-            <td th:text="${wordbook.category.name}"></td>
+            <td>
+              <th:block th:if="${#lists.isNotEmpty(wordbook.wordbookWords)}">
+                <span th:text="${wordbook.wordbookWords.get(0).category.name}"></span>
+              </th:block>
+            </td>
             <td>
               <!--後で直す-->
               <form action="#" th:action="@{/user/learning/wordbooks/{id}(id=${wordbook.id})}" method="GET">
-                <input type="number" name="nums" id="nums" value="" min="1" max="" required>
+                <input type="number" name="nums" id="nums" value="" min="1" max="${#lists.size(wordbook.wordbookWords)}" required>
                 <button type="submit" class="btn btn-danger btn-sm m-1">学習開始</button>
             </td>
           </tr>
