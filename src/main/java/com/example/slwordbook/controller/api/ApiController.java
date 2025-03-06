@@ -33,6 +33,6 @@ public class ApiController {
             return "user-add";
         }
         userService.addDeletedUserAndHashPassword(user);
-        return "redirect:/api";
+        return "redirect:/login";
     }
 }
