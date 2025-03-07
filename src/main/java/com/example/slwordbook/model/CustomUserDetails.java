@@ -59,5 +59,15 @@ public class CustomUserDetails implements UserDetails {
         return !user.isDeleted();
     }
 
+    public Long getUserId() {
+        // TODO Auto-generated method stub
+        return user.getId();
+    }
+
+    public User getUser() {
+        // TODO Auto-generated method stub
+        return user;
+    }
+
 
 }

@@ -20,7 +20,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@SQLRestriction("updatedAt IS NULL AND is_deleted IS false")
+@SQLRestriction("is_deleted IS false")
 @Table(name = "wordbooks")
 public class Wordbook {
     
@@ -47,6 +47,7 @@ public class Wordbook {
     //更新日時
     @Column
     private LocalDateTime updatedAt;
+
 
     //削除フラグ
     @Column(nullable = false)

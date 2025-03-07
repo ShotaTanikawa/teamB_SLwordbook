@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.slwordbook.model.User;
 import com.example.slwordbook.model.Wordbook;
 import com.example.slwordbook.repository.WordbookRepository;
 
@@ -18,4 +19,8 @@ public class WordbookService {
     public List<Wordbook> listAll() {
         return wordbookRepository.findAll();
     }
+
+    public List<Wordbook> findByUser(User user) {
+        return wordbookRepository.findByUser(user);
+    };
 }

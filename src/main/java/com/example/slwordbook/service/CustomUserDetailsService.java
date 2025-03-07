@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.example.slwordbook.model.CustomUserDetails;
 import com.example.slwordbook.model.User;
 import com.example.slwordbook.repository.RoleRepository;
 import com.example.slwordbook.repository.UserRepository;
@@ -36,13 +37,15 @@ public class CustomUserDetailsService implements UserDetailsService {
             .map(role -> new SimpleGrantedAuthority(role.getName()))
             .collect(Collectors.toSet());
 
-        return new org.springframework.security.core.userdetails.User(
-            user.getUsername(),
-            user.getPassword(),
-            !user.isDeleted(),
-            true, true, true, // accountNonExpired, credentialsNonExpired, accountNonLocked
-            grantedRoles
-        );
+        // return new org.springframework.security.core.userdetails.User(
+        //     user.getUsername(),
+        //     user.getPassword(),
+        //     !user.isDeleted(),
+        //     true, true, true, // accountNonExpired, credentialsNonExpired, accountNonLocked
+        //     grantedRoles
+        // );
+
+        return new CustomUserDetails(user);
     }
     
 }

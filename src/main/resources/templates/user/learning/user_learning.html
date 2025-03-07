@@ -2,13 +2,13 @@
 <html
     xmlns:th="http://www.thymeleaf.org"
     xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-    th:replace="~{layout/base :: layout(~{::title}, ~{::link}, ~{::body/content()})}"
->
+    th:replace="~{layout/base_user :: layout(~{::title}, ~{::link}, ~{::body/content()})}"
+    >
 <head>
   <title>学習機能</title>
-  <link rel="stylesheet" href="user_learning.css">
 </head>
 <body>
+  <main class="content">
   <div class="pcoded-content">
     <div class="page-header">
               <h2>学習機能</h2>
@@ -47,15 +47,17 @@
         </div>
       </div>
       <div class="button-container">
+        <button id="prev-btn" class="prev-btn">前へ</button>
         <button id="next-btn" class="next-btn">次へ</button>
-        <a th:href="user/learning/user_learning.html" class="cancel-btn">終了</a>
+        <a th:href="@{/user/learning/wordbooks}" class="cancel-btn">終了</a>
       </div>
     </div>
   </div>
-  <script>
-    let wordList = /*[[${wordList}]]*/ [];
+  <script th:inline="javascript">
+    var listWords = /*[[${listWords}]]*/ "";
+    console.log(listWords);
   </script>
-  <script src="user_learning_wordbooks.js"></script>
+  </main>
 </body>
 </html>
 

@@ -11,7 +11,6 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 
 @Entity
-@SQLRestriction("favorite IS false")
 @Table(name = "words_wordbooks")
 public class WordbookWord {
 
