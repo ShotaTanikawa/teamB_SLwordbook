@@ -4,7 +4,7 @@
 <head>
 </head>
 <body>
-  <nav th:fragment="sidebar" class="pcoded-navbar">
+  <!-- <nav th:fragment="sidebar" class="pcoded-navbar">
     <ul>
       <li>
         <a th:href="@{/admin}">
@@ -27,6 +27,14 @@
         </a>
       </li>
     </ul>
-  </nav>
+  </nav> -->
+  <aside th:fragment="sidebar_admin" class="sidebar">
+    <ul>
+      <li><a th:href="@{/admin}">HOME</a></li>
+      <li><a th:href="@{/admin/userlist}">ユーザー管理</a></li>
+      <li><a th:href="@{/admin/categories}">辞書管理</a></li>
+      <li><a th:href="@{/admin/mypage/edit}">マイページ</a></li>
+    </ul>
+  </aside>
 </body>
 </html>

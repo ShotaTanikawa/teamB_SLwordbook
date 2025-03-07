@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{layout/sidebar_admin :: sidebar}">
+xmlns:th="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+    th:replace="~{layout/base_admin :: layout(~{::title}, ~)}">
 <head>
     <meta charset="UTF-8">
     <title>管理者ホーム</title>
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
 </head>
 <body>
-    
 </body>
 </html>

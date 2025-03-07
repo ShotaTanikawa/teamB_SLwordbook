@@ -12,15 +12,15 @@
 </head>
 <body>
     <div id="pcoded" class="pcoded">
-      <div class="pcoded-container navbar-wrapper">
+    <div class="pcoded-container navbar-wrapper">
         <div th:replace="~{layout/header :: header}"></div>
         <div class="pcoded-main-container">
-          <div class="pcoded-wrapper">
-            <div th:replace="~{layout/sidebar :: sidebar}"></div>
+        <div class="pcoded-wrapper">
+            <div th:replace="~{layout/sidebar_admin :: sidebar_admin}"></div>
             <div th:replace="${contents}"></div>
-          </div>
         </div>
-      </div>
+        </div>
+    </div>
     </div>
 </body>
 </html>

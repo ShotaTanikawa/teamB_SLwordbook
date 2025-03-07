@@ -4,7 +4,7 @@
 <head>
 </head>
 <body>
-  <nav th:fragment="sidebar" class="pcoded-navbar">
+  <!-- <nav th:fragment="sidebar" class="pcoded-navbar">
     <ul>
       <li>
         <a th:href="@{/user}">
@@ -32,6 +32,15 @@
         </a>
       </li>
     </ul>
-  </nav>
+  </nav> -->
+  <aside th:fragment="sidebar_user" class="sidebar">
+    <ul>
+      <li><a th:href="@{/user}">HOME</a></li>
+      <li><a th:href="@{/user/categories}">辞書</a></li>
+      <li><a th:href="@{/user/workbooks}">MY単語帳</a></li>
+      <li><a th:href="@{/user/learning/wordbooks}">学習機能</a></li>
+      <li><a th:href="@{/user/mypage/edit}">マイページ</a></li>
+    </ul>
+  </aside>
 </body>
 </html>
