@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ホーム画面</title>
+</head>
+<body>
+    <p th:text="'Logged in as: ' + ${username}"></p>
+    <form action="/admin" method="get">
+        <input type="submit" value="管理者ページへ">
+    </form>
+    <form action="/user" method="get">
+        <input type="submit" value="ユーザーページへ">
+    </form>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+</head>
+<body>
+    <nav th:fragment="header" class="navbar header-navbar">
+        <div class="navbar-wrapper">
+            <div class="navbar-title">
+                <a th:href="@{/home}">
+                    <span>SL単語帳</span>
+                </a>
+            </div>
+            
+            <div class="user-menu">
+                <span class="user-name" sec:authentication="principal.username">ユーザー名</span>
+                <div class="dropdown-menu">
+                    <a href="#" th:href="@{/logout}" class="logout-btn">ログアウト</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+</body>
+</html>

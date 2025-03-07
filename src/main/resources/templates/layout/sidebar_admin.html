@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+</head>
+<body>
+  <nav th:fragment="sidebar" class="pcoded-navbar">
+    <ul>
+      <li>
+        <a th:href="@{/admin}">
+          <span>HOME</span>
+        </a>
+      </li>
+      <li>
+        <a th:href="@{/admin/userlist}">
+          <span>ユーザー管理</span>
+        </a>
+      </li>
+      <li>
+        <a th:href="@{/admin/categories}">
+          <span>辞書管理</span>
+        </a>
+      </li>
+      <li>
+        <a th:href="@{/admin/mypage/edit}">
+          <span>マイページ</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</body>
+</html>

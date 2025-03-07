@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{layout/base :: layout(~{::title},~{::body/content()})}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SL単語帳 マイページ</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+
+<body>
+    <h1>マイページ</h1>
+    <p>ユーザー情報を変更できます</p>
+    <!-- ユーザーネーム変更フォーム -->
+    <form class="profile-form-container" th:action="@{/user/edit}" method="post">
+        <div>
+            <label for="name">名前</label><br>
+            <input type="text" id="name" name="name" th:value="${user.name}" required>
+            <div>
+                <button type="submit" id="save-name-button">変更を保存</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- パスワード変更フォーム -->
+    <form class="profile-form-container" th:action="@{/user/edit}" method="post">
+        <div>
+            <label for="password">現在パスワード</label><br>
+            <input type="password" id="current-password" name="current-password" required>
+        </div>
+        <div>
+            <label for="password">新しいパスワード</label><br>
+            <input type="password" id="new-password" name="new-password" required>
+        </div>s
+        <div>
+            <label for="password">新しいパスワード（確認）</label><br>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+        </div>
+        <div>
+            <button type="submit" id="change-password-button">パスワードを変更</button>
+        </div>
+    </form>
+    <form th:action="@{/user/delete}" method="post">
+        <div>
+            <button type="submit" id="delete-account-button" style="color: red;">退会する</button>
+        </div>
+    </form>
+</body>
+
+</html>
