@@ -3,6 +3,7 @@ package com.example.slwordbook.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.slwordbook.model.Category;
+import com.example.slwordbook.model.User;
 import com.example.slwordbook.model.Word;
 import com.example.slwordbook.service.CategoryService;
+import com.example.slwordbook.service.UserService;
 import com.example.slwordbook.service.WordService;
 
 import jakarta.validation.Valid;
@@ -29,15 +32,8 @@ public class AdminWordController {
     @Autowired
     private WordService wordService;
 
-    // //カテゴリー内の単語一覧機能
-    // @GetMapping("/{categoryId}")
-    // public String wordIndex(@PathVariable("categoryId") Long categoryId, Model model) {
-    //     Category category = categoryService.findCategoryById(categoryId);
-    //     List<Word> words = wordService.findAllWords();
-    //     model.addAttribute("category", category);
-    //     model.addAttribute("words", words);
-    //     return "admin/categories/admin_wordslist.html";
-    // }
+    @Autowired
+    private UserService userService;
 
     //カテゴリー内の単語一覧機能・検索機能
     @GetMapping("/{categoryId}")
@@ -46,13 +42,17 @@ public class AdminWordController {
         Category category = categoryService.findCategoryById(categoryId);
         List<Word> words;
 
+        //辞書区分を区別するためのログインユーザー取得
+        User loginUser = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        
+
         // 検索条件があれば絞り込む
         if (keyword != null && !keyword.isEmpty()) {
             // 名前で検索
-            words = wordService.search(keyword, categoryId);
+            words = wordService.searchWithUser(keyword, categoryId, loginUser.getId());
         } else {
             // 検索条件がなければ全ての単語を取得
-            words = wordService.findAllWordsByCategory(categoryId);
+            words = wordService.findAllWordsByCategoryWithUser(categoryId, loginUser.getId());
         }
 
         model.addAttribute("category", category);

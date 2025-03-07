@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+        th:replace="~{layout/base_user :: layout(~{::title}, ~{::link}, ~{::main})}"
+        >
+<head>
+    <meta charset="UTF-8">
+    <title>SL単語帳 管理画面</title>
+</head>
+<body>
+    <main class="content">
+        <h1 th:text="${category.name} + '単語一覧'">単語一覧</h1>
+        <p th:text="${category.name} + '関連の単語が表示されます。'">関連単語が表示されます。</p>
+
+        検索フォーム
+        <div class="search-container">
+            <form th:action="@{/user/categories/{categoryId}(categoryId=${category.id})}" th:method="get">
+                <input type="search" id="keyword" name="keyword" th:value="${keyword}" placeholder="単語を検索">
+                <button type="submit">検索</button>
+                <a th:href="@{/user/categories/{categoryId}(categoryId=${category.id})}" class="reset-btn">リセット</a>
+            </form>
+        </div>
+
+        <!-- 単語一覧テーブル -->
+        <table class="words-table">
+            <tr>
+                <th>ID</th>
+                <th>単語名</th>
+                <th>意味</th>
+                <th>辞書区分</th>
+                <th>アクション</th>
+            </tr>
+            <tr th:each="word : ${words}">
+                <td th:text="${word.id}">ID</td>
+                <td th:text="${word.name}">単語名</td>
+                <td th:text="${word.describe}">意味</td>
+                <td>
+                    <span th:if="${word.user != null and word.user.id == loginUser.id}">MY辞書</span>
+                    <span th:if="${word.user == null or word.user.id != loginUser.id}">辞書</span>
+                </td>
+                <td>
+                    <a th:href="@{/user/categories/{categoryId}/detail/{wordId}(categoryId=${category.id}, wordId=${word.id})}" class="detail-btn">詳細</a>
+                    <a th:if="${word.user != null and word.user.id == loginUser.id}"
+                        th:href="@{/user/categories/{categoryId}/edit/{wordId}(categoryId=${category.id}, wordId=${word.id})}" class="edit-btn">編集</a>
+                    <a th:if="${word.user != null and word.user.id == loginUser.id}"
+                        th:href="@{/user/categories/{categoryId}/delete/{wordId}(categoryId=${category.id}, wordId=${word.id})}" class="delete-btn">削除</a>
+                </td>
+            </tr>
+        </table>
+
+        <div class="button-container">
+            <a th:href="@{/user/categories/{categoryId}/new(categoryId=${category.id})}" class="add-btn">単語追加</a>
+        </div>
+    </main>
+</body>
+</html>

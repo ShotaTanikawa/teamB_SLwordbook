@@ -19,10 +19,10 @@ public class WordService {
 
     @Autowired
     private WordRepository wordRepository;
-    
+
     //カテゴリー付属する単語全取得メソッド
-    public List<Word> findAllWordsByCategory(Long categoryId) {
-        return wordRepository.findByCategoryId(categoryId);
+    public List<Word> findAllWordsByCategoryWithUser(Long categoryId, Long userId) {
+        return wordRepository.findAllWordsByCategoryIdAndUserId(categoryId, userId);
     }
 
     //単語(個)取得メソッド
@@ -32,8 +32,8 @@ public class WordService {
     }
 
     //検索（単語名）メソッド
-    public List<Word> search(String keyword, Long categoryId) {
-        return wordRepository.search(keyword, categoryId);
+    public List<Word> searchWithUser(String keyword, Long categoryId, Long userId) {
+        return wordRepository.searchAndUserId(keyword, categoryId, userId);
     }
 
     //保存メソッド
