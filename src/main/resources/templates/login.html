@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ログイン</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
 </head>
 
 <body>
@@ -13,14 +14,14 @@
         <h3>Please Sign In</h3>
         <hr>
         <br>
-        <!-- <div th:if="${param.error}">
+        <div th:if="${param.error}">
           <div th:if="${session.containsKey('SPRING_SECURITY_LAST_EXCEPTION')}">
             <div class="alert alert-danger">
               <i class="bi bi-exclamation-triangle-fill"></i>
               <span th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
             </div>
           </div>
-        </div> -->
+        </div>
         <input type="text" name="username" placeholder="ユーザー名" required />
         <input type="password" name="password" placeholder="パスワード" required />
         <button name="Submit" value="Login" type="submit">Login</button>
@@ -32,4 +33,34 @@
     </div>
   </div>
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ログイン</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <form th:action="@{/login}" method="post" class="form-signin">
+            <h3>ログインページ</h3>
+            <hr>
+            <br>
+            <input type="text" name="username" placeholder="ユーザー名" required />
+            <input type="password" name="password" placeholder="パスワード" required />
+            <button name="Submit" value="Login" type="submit">ログイン</button>
+            <p></p>
+        </form>
+        <form th:action="@{/login/signup}">
+            <button name="Submit" value="signup" type="submit">新規登録</button>
+        </form>
+    </div>
+</body>
+
 </html>
