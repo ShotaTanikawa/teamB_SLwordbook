@@ -27,7 +27,7 @@ public class SecurityConfig {
                 // ログインページを表示するURL(GET)
                 .loginPage("/login")
                 // ログインできなかった時のURL
-                // .failureUrl("/login?error")
+                // .failureUrl("/login/error")
                 // これを付けたページはログイン無しでもアクセス出来る
                 // .permitAll()
             ).logout(logout -> logout
