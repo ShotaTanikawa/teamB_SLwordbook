@@ -19,7 +19,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@SQLRestriction("updatedAt IS NULL AND is_deleted IS false AND opened IS false")
+@SQLRestriction("is_deleted IS false")
 @Table(name = "categories")
 public class Category {
     

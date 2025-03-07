@@ -1,5 +1,6 @@
 package com.example.slwordbook.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,20 @@ public class UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    public List<User> findAllUser() {
+        return userRepository.findAll();
+    }
+
+    public List<User> findAllUser(String keyword) {
+        if (keyword != null && !keyword.isEmpty()) {
+            return userRepository.search(keyword);
+        }
+        // それ以外の場合
+        else {
+            return userRepository.findAll();
+        }
+    }
 
     //ユーザー新規登録機能
     public User addDeletedUserAndHashPassword(User user) {

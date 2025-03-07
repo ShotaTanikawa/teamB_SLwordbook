@@ -21,7 +21,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@SQLRestriction("updatedAt IS NULL AND is_deleted IS false")
+@SQLRestriction("is_deleted IS false")
 @Table(name = "words")
 public class Word {
     
