@@ -14,7 +14,7 @@ public interface WordRepository extends JpaRepository<Word, Long> {
 
     //カテゴリーとユーザーに対応した単語取得用
     @Query("SELECT w FROM Word w WHERE w.category.id = :categoryId AND (w.user.id = :userId OR w.user.id IS NULL)")
-    List<Word> findAllWordsByCategoryIdAndUserId(Long categoryId, Long userId);
+    List<Word> findAllWordsByCategoryIdAndUserId(@Param("categoryId") Long categoryId, @Param("userId") Long userId);
     
     //あいまい検索機能(大小区別)
     // @Query("SELECT w FROM Word w WHERE w.name LIKE %?1% AND w.category.id = ?2")
