@@ -2,10 +2,9 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ログイン成功</title>
+    <title>ユーザーホーム</title>
 </head>
 <body>
-    <h1>ようこそ！</h1>
-    <p th:text="'Logged in as: ' + ${username}"></p>
+    <p th:text="${username} + さんのホーム画面です"></p>
 </body>
 </html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理者ホーム</title>
+</head>
+<body>
+    <p th:text="${username} + さんのホーム画面です"></p>
+    <form th:action="@{/admin/userlist}" th:method="get">
+        <input type="submit" value="ユーザー一覧へ">
+    </form>
+</body>
+</html>

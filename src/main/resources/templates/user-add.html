@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>新規登録</title>
+</head>
+<body>
+    <h1>新規登録</h1>
+    <form th:action="@{/login/signup}" th:method="post" th:object="${user}">
+        <div>
+            <label for="username" class="form-label">ユーザー名(ログインアカウント)</label>
+            <input type="text" class="form-control" th:field="*{username}" placeholder="ユーザー名">
+            <!-- エラー時のみ表示 -->
+            <p><span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</span></p>
+        </div>
+        <div>
+            <label for="password" class="form-label">ログインパスワード</label>
+            <input type="password" class="form-control" th:field="*{password}" placeholder="パスワード">
+            <!-- エラー時のみ表示 -->
+            <p><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</span></p>
+        <div>
+        <button type="submit" class="btn btn-success">ユーザーの作成</button>
+        </div>
+    </div>
+    </form>
+    <form action="/login" method="get">
+        <button type="submit" class="btn btn-success">戻る</button>
+    </form>
+</body>
+</html>

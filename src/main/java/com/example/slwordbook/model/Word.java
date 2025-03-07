@@ -21,7 +21,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@SQLRestriction("updatedAt IS NULL AND is_deleted IS false")
+@SQLRestriction("is_deleted IS false")
 @Table(name = "words")
 public class Word {
     
@@ -33,7 +33,7 @@ public class Word {
     //単語名
     @NotBlank(message = "単語名は必須です")
     @Size(max = 30, message="単語名は50文字までにして下さい")
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
     //単語の意味

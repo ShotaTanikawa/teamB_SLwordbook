@@ -6,5 +6,11 @@
 </head>
 <body>
     <p th:text="'Logged in as: ' + ${username}"></p>
+    <form action="/admin" method="get">
+        <input type="submit" value="管理者ページへ">
+    </form>
+    <form action="/user" method="get">
+        <input type="submit" value="ユーザーページへ">
+    </form>
 </body>
 </html>

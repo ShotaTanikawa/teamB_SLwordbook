@@ -21,24 +21,27 @@ public class SecurityConfig {
         http
             .formLogin(login -> login
                 // ログイン成功時に遷移するURL
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/home")
                 // ログイン処理を行うURL(POST)
-                // .loginProcessingUrl("/login")
+                .loginProcessingUrl("/login")
                 // ログインページを表示するURL(GET)
-                // .loginPage("/home/login")
+                .loginPage("/login")
                 // ログインできなかった時のURL
                 // .failureUrl("/login?error")
                 // これを付けたページはログイン無しでもアクセス出来る
                 // .permitAll()
             ).logout(logout -> logout
-                .logoutSuccessUrl("/")
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
             ).authorizeHttpRequests(authz -> authz
                 // resourceフォルダの直下(cssやimg)は認証が無くてもアクセスできる
                 .requestMatchers(PathRequest.toStaticResources()
                     .atCommonLocations()).permitAll()
                 // URL「/」にはログイン無しでもアクセスできる
                 // .requestMatchers("/").permitAll()
-                .requestMatchers("/api/**").permitAll()
+                // login以降のURLにはログインなしでアクセスできる
+                .requestMatchers("/login/**").permitAll()
+                // .requestMatchers("/api/**").permitAll()
                 // /user 以降のURLにはロールが「USER」のみアクセス出来る
                 .requestMatchers("/user/**").hasRole("USER")
                 // /admin 以降のURLにはロールが「ADMIN」のみアクセス出来る
