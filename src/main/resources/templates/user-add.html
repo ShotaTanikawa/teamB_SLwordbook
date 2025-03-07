@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>新規登録</h1>
-    <form th:action="@{/api/signup}" th:method="post" th:object="${user}">
+    <form th:action="@{/login/signup}" th:method="post" th:object="${user}">
         <div>
             <label for="username" class="form-label">ユーザー名(ログインアカウント)</label>
             <input type="text" class="form-control" th:field="*{username}" placeholder="ユーザー名">

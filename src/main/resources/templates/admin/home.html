@@ -5,7 +5,7 @@
     <title>管理者ホーム</title>
 </head>
 <body>
-    <h1>管理者のホーム画面です</h1>
+    <p th:text="${username} + さんのホーム画面です"></p>
     <form th:action="@{/admin/userlist}" th:method="get">
         <input type="submit" value="ユーザー一覧へ">
     </form>

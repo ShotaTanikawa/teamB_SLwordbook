@@ -34,7 +34,7 @@ public class UserService {
         }
         // それ以外の場合
         else {
-            return userRepository.findAll();
+            return findAllUser();
         }
     }
 
@@ -62,5 +62,10 @@ public class UserService {
         user.setRoles(Set.of(role));
 
         return userRepository.save(user);
+    }
+
+    //ユーザー名で情報を取得する
+    public User findByname(String name) {
+        return userRepository.findByUsername(name);
     }
 }

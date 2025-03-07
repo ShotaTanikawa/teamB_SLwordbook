@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    
+    //ユーザー名のユニーク制約を扱うHandler
     @ExceptionHandler(MyUniqueConstraintViolationException.class)
     public Object handleUniqueExceptions(Exception ex) {
         ModelAndView mav = new ModelAndView("error/custom-error");

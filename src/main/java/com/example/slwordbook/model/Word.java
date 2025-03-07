@@ -33,7 +33,7 @@ public class Word {
     //単語名
     @NotBlank(message = "単語名は必須です")
     @Size(max = 30, message="単語名は50文字までにして下さい")
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
     //単語の意味
